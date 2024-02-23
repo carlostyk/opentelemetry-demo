@@ -1,9 +1,6 @@
 FROM confluentinc/cp-kafka:latest-ubi8
 
 USER appuser
-WORKDIR /tmp
-COPY ./src/kafka/clusterID clusterID
-COPY ./src/kafka/update_run.sh update_run.sh
 
 ENV KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
 ENV KAFKA_CONTROLLER_QUORUM_VOTERS='1@0.0.0.0:9093'
@@ -19,4 +16,4 @@ ENV KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
 ENV KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
 ENV KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=1
 
-ENTRYPOINT ["/bin/sh", "-c", "ls -lh /tmp && /tmp/update_run.sh && /etc/confluent/docker/run"]
+ENV CLUSTER_ID=ckjPoprWQzOf0-FuNkGfFQ
